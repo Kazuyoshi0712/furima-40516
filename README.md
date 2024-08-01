@@ -1,24 +1,69 @@
-# README
+## Usersテーブル
+| Column              | Type         | Options               |
+|---------------------|--------------|-----------------------|
+| name                | string       | null: false           |
+| email               | string       | null:false,unique     |
+| password_digest     | string       | null:false            |
+| created_at          | datetime     |                       |
+| updated_at          | datetime     |                       |
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Association
+has_many :items
+has_many :comments
+has_many :purchases
+has_secure_password
 
-Things you may want to cover:
 
-* Ruby version
+## Itemsテーブル
+| Column              | Type         | Options               |
+|---------------------|--------------|-----------------------|
+| name                | string       | null:false            |
+| description         | text         | null:false            |
+| price               | integer      | null:false            |
+| user_id             | integer      | foreign key(users.id) |
+| created_at          | datetime     |                       |
+| updated_at          | datetime     |                       |
 
-* System dependencies
+### Association
+belongs_to :user
+has_many :comments
+has_many :images
+has_one :purchase
 
-* Configuration
+## Commentsテーブル
+| Column              | Type         | Options               |
+|---------------------|--------------|-----------------------|
+| content             | text         | null:false            |
+| user_id             | integer      | foreign key(users.id) |
+| item_id             | integer      | foreign key(items.id) |
+| created_at          | datetime     |                       |
+| updated_at          | datetime     |                       |
 
-* Database creation
+### Association
+belongs_to :user
+belongs_to :item
 
-* Database initialization
 
-* How to run the test suite
+## Purchasesテーブル
+| Column              | Type         | Options               |
+|---------------------|--------------|-----------------------|
+| user_id             | integer      | foreign key(user.id)  |
+| item_id             | integer      | foreign key(items.id) |
+| created_at          | datetime     |                       |
+| updated_at          | datetime     |                       |
 
-* Services (job queues, cache servers, search engines, etc.)
+### Association
+belongs_to :user
+belongs_to :item
 
-* Deployment instructions
 
-* ...
+## Imagesテーブル
+| Column              | Type         | Options               |
+|---------------------|--------------|-----------------------|
+| url                 | string       | null:false            |
+| item_id             | integer      | foreign key(items.id) |
+| created_at          | datetime     |                       |
+| update_at           | datetime     |                       |
+
+### Association
+belongs_to :item
