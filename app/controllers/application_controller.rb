@@ -1,11 +1,17 @@
 class ApplicationController < ActionController::Base
-  before_action :basic_auth
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
-  private
+  protected
 
-  def basic_auth
-    authenticate_or_request_with_http_basic do |username, password|
-      username == ENV['BASIC_AUTH_USER'] && password == ENV['BASIC_AUTH_PASSWORD']
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up) do |user_params|
+      user_params.permit(:email, :password, :password_confirmation, :nickname, :first_name, :last_name, :first_name_kana,
+                         :last_name_kana, :birth_date)
+    end
+
+    devise_parameter_sanitizer.permit(:account_update) do |user_params|
+      user_params.permit(:email, :password, :password_confirmation, :nickname, :first_name, :last_name, :first_name_kana,
+                         :last_name_kana, :birth_date)
     end
   end
 end
