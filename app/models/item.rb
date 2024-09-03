@@ -2,11 +2,12 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to_active_hash :category
-  belongs_to_active_hash :status
-  belongs_to_active_hash :delivery_fee
-  belongs_to_active_hash :prefecture
-  belongs_to_active_hash :delivery_day
+  belongs_to :category
+  belongs_to :status
+  belongs_to :delivery_fee
+  belongs_to :prefecture
+  belongs_to :delivery_day
+  has_many   :orders
 
   validates :name, presence: true
   validates :description, presence: true
@@ -18,4 +19,11 @@ class Item < ApplicationRecord
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
   validates :price, format: { with: /\A[0-9]+\z/, message: 'is invalid. Input half-width characters' }
   validates :image, presence: true
+
+  def sold_out?
+    orders.exists?(item_id: id)
+  end
+
+  def shipping_cost
+  end
 end
