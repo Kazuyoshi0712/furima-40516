@@ -8,6 +8,6 @@ class AddColumnsToItems < ActiveRecord::Migration[7.0]
     add_column :items, :prefecture_id, :integer, null: false
     add_column :items, :delivery_day_id, :integer, null: false
     add_column :items, :price, :integer, null: false
-    add_reference :items, :user, foreign_key: true
+    add_reference :items, :user, foreign_key: true, null: false
   end
 end
