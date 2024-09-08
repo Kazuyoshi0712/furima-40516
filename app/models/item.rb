@@ -24,6 +24,6 @@ class Item < ApplicationRecord
   # orders.exists?(item_id: id)
   # end
 
-  def shipping_cost
-  end
+  # def shipping_cost
+  # end
 end
