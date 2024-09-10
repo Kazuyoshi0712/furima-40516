@@ -1,4 +1,4 @@
-<% if resource.errors.any? %>
+<% if @item.errors.any? %>
 <div id="error_explanation">
   <h2><%= pluralize(@item.errors.count,"error") %> prohibited this <%= @item.class.model_name.human.downcase %> from being saved:</h2>
   <ul>
