@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+  belongs_to :user
   has_one_attached :image
   #has_one :order
 
@@ -22,8 +23,8 @@ class Item < ApplicationRecord
   validates :image, presence: true
 
   #def sold_out?
-    #order.present?
-  #end
+   # order.present?
+ # end
 
   def shipping_cost
     delivery_fee_id == 1 ? '出品者負担' : '購入者負担'

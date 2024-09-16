@@ -1,10 +1,9 @@
-<% if resource.errors.any? %>
-<div id="error_explanation">
-  <h2><%= pluralize(@item.errors.count,"error") %> prohibited this <%= @item.class.model_name.human.downcase %> from being saved:</h2>
+<% if model.errors.any? %>
+<div class="error-alert">
   <ul>
-    <% @item.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
+    <% model.errors.full_messages.each do |message| %>
+    <li class='error-message'><%= message %></li>
     <% end %>
-    </ul>
-    </div>
-    <% end %>
+  </ul>
+</div>
+<% end %>
