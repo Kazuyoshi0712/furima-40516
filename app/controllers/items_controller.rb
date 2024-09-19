@@ -33,6 +33,15 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    if current_user == @item.user
+      @item.destroy
+      redirect_to root_path, notice: '商品を削除しました'
+    else
+      redirect_to root_path, alert: '商品の削除に失敗しました'
+    end
+  end
+
   private
 
   def set_item
