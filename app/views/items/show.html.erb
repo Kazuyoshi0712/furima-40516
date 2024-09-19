@@ -27,14 +27,14 @@
 
    <% if user_signed_in? %>
    <% if current_user.id == @item.user_id %>
-    <%# link_to "商品の編集", edit_item_path(@item), method: :get, class: "item-red-btn" %>
+    <%= link_to "商品の編集", edit_item_path(@item), method: :get, class: "item-red-btn" %>
 
     <p class="or-text">or</p>
-    <%# link_to "削除", item_path(@item), data: {turbo_method: :delete}, class:"item-destroy" %>
+    <%= link_to "削除", "#", data: {turbo_method: :delete}, class:"item-destroy" %>
     <% else %>
 
     <%# 商品が売れていない場合はこちらを表示しましょう %>
-    <%# link_to "購入画面に進む", new_item_purchase_path(@item) ,class:"item-red-btn" %>
+    <%= link_to "購入画面に進む", "#" ,class:"item-red-btn" %>
     <% end %>
     <% end %>
     <%# //商品が売れていない場合はこちらを表示しましょう %>
@@ -106,7 +106,7 @@
       後ろの商品 ＞
     </a>
   </div>
-  <a href="<%= category_path(@item.category) %>" class="another-item"><%= @item.category.name %>をもっと見る</a>
+  <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
 </div>
 
 <%= render "shared/footer" %>
