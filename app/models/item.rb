@@ -1,7 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
-  has_one :order
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
@@ -22,9 +21,9 @@ class Item < ApplicationRecord
                     numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, only_integer: true }
   validates :image, presence: true
 
-  def sold_out?
-    order.present?
-  end
+  # def sold_out?
+  # order.present?
+  # end
 
   def shipping_cost
     delivery_fee_id == 1 ? '出品者負担' : '購入者負担'

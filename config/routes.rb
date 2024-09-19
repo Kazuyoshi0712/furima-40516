@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   root to: 'items#index'
 
   resources :items, only: [:index, :new, :create, :show, :edit, :update ]
-  resources :categories, oinly: [:show]
  
   # Defines the root path route ("/")
   # root "articles#index"
