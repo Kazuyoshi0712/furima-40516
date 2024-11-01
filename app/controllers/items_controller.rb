@@ -2,6 +2,11 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :check_owner, only: [:edit, :update, :destroy]
+  before_action :check_purchase_restriction, only: [:show]
+
+  def check_purchase_restriction
+    redirect_to root_path if current_user == @item.user || @item.sold_out?
+  end
   def index
     @items = Item.all.order(created_at: 'DESC')
   end
